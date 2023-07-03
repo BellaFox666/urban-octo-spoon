@@ -3,18 +3,21 @@ import mysql.connector
 import sqlite3
 
 # Load the datasets
-movies_df = pd.read_csv('movies.csv')
-ratings_df = pd.read_csv('ratings.csv')
-revenues_df = pd.read_csv('revenues.csv')
+movies_df = pd.read_csv('./raw_datasets/movies.csv')
+ratings_df = pd.read_csv('./raw_datasets/ratings.csv')
+revenues_df = pd.read_csv('./raw_datasets/revenues.csv')
+
 
 ## movies dataset
 # Extract the release year from the title column
 movies_df['year'] = movies_df['title'].str.extract(r'\((\d{4})\)')
+# Replace missing values in 'year' column with an empty string
+movies_df['year'].fillna('', inplace=True)
 # Remove the year from the title column
 movies_df['title'] = movies_df['title'].str.extract(r'^(.*) \(\d{4}\)$')
 
 ## revenues dataset
-# Drop the 'id' and theaters columns
+# Drop id and theaters columns
 revenues_df.drop('id', axis=1, inplace=True)
 revenues_df.drop('theaters', axis=1, inplace=True)
 
@@ -33,13 +36,8 @@ ratings_df.drop('timestamp', axis=1, inplace=True)
 ratings_df.insert(0, 'ratingId', range(1, len(ratings_df) + 1))
 
 # Export all three DataFrames to a new CSV files
-# movies_df.to_csv("movies_updated.csv", index=False)
-# revenues_df.to_csv('revenues_updated.csv', index=False)
-ratings_df.to_csv('ratings_updated.csv', index=False)
-
-
-# print(ratings_df)
-
-
+movies_df.to_csv("./updated_datasets/movies_updated.csv", index=False)
+revenues_df.to_csv('./updated_datasets/revenues_updated.csv', index=False)
+ratings_df.to_csv('./updated_datasets/ratings_updated.csv', index=False)
 
 
