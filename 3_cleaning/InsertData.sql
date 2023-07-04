@@ -1,4 +1,4 @@
--- dataintegration database has been created and connection has been configured
+-- In MySQL lcoally, "dataintegration" database has been created and connection has been configured
 
 use dataintegration
 
