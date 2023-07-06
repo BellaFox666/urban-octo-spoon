@@ -74,13 +74,13 @@ WHERE rating IS NULL;
 -- remove rows with empty title from movies table
 DELETE FROM movies
 WHERE title = '';
--- 52 riws affected
+-- 52 rows affected
 
 -- Convert year column in movies table to integer
 ALTER TABLE movies
 MODIFY COLUMN year INT;
 
--- Convert revenue column in revenues table to decimal(15, 5)
+-- Convert revenue column in revenues table to decimal(20, 5)
 ALTER TABLE revenues
 MODIFY COLUMN revenue DECIMAL(20, 5);
 
